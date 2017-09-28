@@ -11,10 +11,10 @@ import model.*;
  *
  */
 public class SystemAPI {
-	ItemList beds;
-	ItemList students;
-	ItemList properties;
-	ItemList rooms;
+	ItemList<Bed> beds;
+	ItemList<Student> students;
+	ItemList<Property> properties;
+	ItemList<Room> rooms;
 	public SystemAPI() {
 		this.beds = null;
 		this.students = null;
@@ -22,14 +22,14 @@ public class SystemAPI {
 		this.rooms = null;
 	}
 	public void listBeds() {
-		ItemList head = beds;
+		ItemList<Bed> head = beds;
 		while(head!=null) {
 			System.out.println(head.retrieve().toString());
 			head=head.next();
 		}
 	}
 	public void listFreeBeds() {
-		ItemList head = beds;
+		ItemList<Bed> head = beds;
 		while(head!=null) {
 			if(((Bed) head.retrieve()).getStudent() == null)
 				System.out.println(head.retrieve().toString());

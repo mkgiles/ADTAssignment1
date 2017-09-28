@@ -7,7 +7,7 @@ public class Property {
 	private String address;
 	private int distance;
 	private int spaces;
-	private ItemList rooms;
+	private ItemList<Room> rooms;
 	/**
 	 * @param address
 	 * @param distance

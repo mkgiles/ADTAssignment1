@@ -4,20 +4,20 @@ package model;
  * @author Conor James Giles
  *
  */
-public class ItemList{
-	private ItemList next = null;
-	private Object object;
-	ItemList(Object object) {
+public class ItemList<T>{
+	private ItemList<T> next = null;
+	private T object;
+	ItemList(T object) {
 		this.object = object;
 	}
-	ItemList(Object object, ItemList list) {
+	ItemList(T object, ItemList<T> list) {
 		this.object = object;
 		this.next = list;
 	}
-	public ItemList next(){
+	public ItemList<T> next(){
 		return next;
 	}
-	public Object retrieve(){
+	public T retrieve(){
 		return object;
 	}
 	public int length() {
@@ -25,19 +25,19 @@ public class ItemList{
 			return 1;
 		return next.length() + 1;
 	}
-	public static void append(ItemList list, Object object) {
-		ItemList head = list;
+	public static <S> void append(ItemList<S> list, S object) {
+		ItemList<S> head = list;
 		if(head==null)
-			list = new ItemList(object);
+			list = new ItemList<S>(object);
 		while(head.next()!=null) {
 			head=head.next();
 		}
-		head.next = new ItemList(object);
+		head.next = new ItemList<S>(object);
 	}
-	public static void prepend(ItemList list, Object object) {
-		list = new ItemList(object, list);
+	public static <S> void prepend(ItemList<S> list, S object) {
+		list = new ItemList<S>(object, list);
 	}
-	public static void insert(ItemList list, Object object, int index) {
+	public static <S> void insert(ItemList<S> list, S object, int index) {
 		if(index == 0) {
 			prepend(list, object);
 		}

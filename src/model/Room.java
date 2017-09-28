@@ -6,7 +6,7 @@ package model;
 public class Room {
 	private int floor;
 	private Boolean ensuite;
-	private ItemList beds;
+	private ItemList<Bed> beds;
 	/**
 	 * @param floor
 	 * @param ensuite
@@ -43,7 +43,7 @@ public class Room {
 	/**
 	 * @return the beds
 	 */
-	public ItemList getBeds() {
+	public ItemList<Bed> getBeds() {
 		return beds;
 	}
 	/**
