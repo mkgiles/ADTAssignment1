@@ -66,6 +66,6 @@ public class Property {
 	 */
 	@Override
 	public String toString() {
-		return "$(member.value}, $(member.value}, $(member.value}";
+		return address + ", " + distance + ", " + spaces;
 	}
 }

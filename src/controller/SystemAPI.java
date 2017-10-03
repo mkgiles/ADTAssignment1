@@ -72,12 +72,19 @@ public class SystemAPI {
 		
 	}
 	public void viewProperty() {
-		
+		ItemList<Property> head = properties;
+		while(head != null) {
+			System.out.println(head.retrieve());
+			head=head.next();
+		}
 	}
 	public void viewProperty(String address) {
 		
 	}
 	public void addProperty(Property property) {
-		properties.append(property);
+		if(properties == null)
+			properties= new ItemList<Property>(property);
+		else
+			properties.append(property);
 	}
 }

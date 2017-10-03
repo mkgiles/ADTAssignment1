@@ -3,6 +3,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import controller.SystemAPI;
+import model.Property;
 /**
  * @author Conor James Giles
  *
@@ -51,6 +52,17 @@ class Menu {
 			switch(Menu.getInt()) {
 			case 0:
 				inMenu=false;
+				break;
+			case 1:
+				out.println("Please enter the address of your new Property: ");
+				String addr = in.nextLine();
+				out.println("Please enter the distance (in km) from the college of your property: ");
+				int dist = Menu.getInt();
+				out.println("Please enter the number of car park spaces of your Property: ");
+				int spaces = Menu.getInt();
+				system.addProperty(new Property(addr, dist, spaces));
+				out.println("Property added.");
+				in.nextLine();
 				break;
 			default:
 				out.println("Invalid index, please try again.");

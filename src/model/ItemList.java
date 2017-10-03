@@ -7,10 +7,10 @@ package model;
 public class ItemList<T>{
 	private ItemList<T> next = null;
 	private T object;
-	ItemList(T object) {
+	public ItemList(T object) {
 		this.object = object;
 	}
-	ItemList(T object, ItemList<T> list) {
+	public ItemList(T object, ItemList<T> list) {
 		this.object = object;
 		this.next = list;
 	}
