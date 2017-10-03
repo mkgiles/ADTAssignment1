@@ -25,24 +25,25 @@ public class ItemList<T>{
 			return 1;
 		return next.length() + 1;
 	}
-	public static <S> void append(ItemList<S> list, S object) {
-		ItemList<S> head = list;
-		if(head==null)
-			list = new ItemList<S>(object);
-		while(head.next()!=null) {
-			head=head.next();
+	public void prepend(T object) {
+		ItemList<T> temp = new ItemList<T>(object, this);
+		this.next = temp.next;
+		this.object = temp.object;
+	}
+	public void append(T object) {
+		if(this.next == null) {
+			this.next = new ItemList<T>(object);
+		}else {
+			this.next.append(object);
 		}
-		head.next = new ItemList<S>(object);
 	}
-	public static <S> void prepend(ItemList<S> list, S object) {
-		list = new ItemList<S>(object, list);
-	}
-	public static <S> void insert(ItemList<S> list, S object, int index) {
+	public void insert(T object, int index) {
 		if(index == 0) {
-			prepend(list, object);
-		}
-		else {
-			insert(list.next(),object,--index);
+			this.next = new ItemList<T>(object, this.next);
+		}else if(this.next == null){
+			this.next = new ItemList<T>(object);
+		}else {
+			this.next.insert(object, --index);
 		}
 	}
 }

@@ -50,7 +50,7 @@ public class Room {
 	 * @param beds the beds to set
 	 */
 	public void addBed(Bed bed) {
-		ItemList.append(beds, bed);
+		beds.append(bed);
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

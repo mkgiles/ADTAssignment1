@@ -78,6 +78,6 @@ public class SystemAPI {
 		
 	}
 	public void addProperty(Property property) {
-		ItemList.append(properties, property);
+		properties.append(property);
 	}
 }

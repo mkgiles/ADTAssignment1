@@ -59,7 +59,7 @@ public class Property {
 	 * @param rooms the rooms to set
 	 */
 	public void addRoom(Room room) {
-		ItemList.append(rooms, room);				
+		rooms.append(room);				
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

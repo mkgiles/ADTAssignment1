@@ -11,7 +11,7 @@ public class Bed {
 	private Type type;
 	private float cost;
 	private int uid;
-	private ItemList student = null;
+	private ItemList<Student> student = null;
 	/**
 	 * @param type
 	 * @param cost
@@ -82,9 +82,9 @@ public class Bed {
 	 */
 	public void setStudent(Student student) {
 		if(type == Type.BUNK && this.student != null)
-			ItemList.append(this.student, student);
+			this.student.append(student);
 		else
-			this.student = new ItemList(student);
+			this.student = new ItemList<Student>(student);
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
