@@ -31,7 +31,7 @@ public class Room {
 	/**
 	 * @return the ensuite
 	 */
-	public Boolean getEnsuite() {
+	public Boolean isEnsuite() {
 		return ensuite;
 	}
 	/**

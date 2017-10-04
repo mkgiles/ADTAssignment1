@@ -66,6 +66,6 @@ public class Property {
 	 */
 	@Override
 	public String toString() {
-		return address + ", " + distance + ", " + spaces;
+		return address + "," + distance + "," + spaces + "";
 	}
 }

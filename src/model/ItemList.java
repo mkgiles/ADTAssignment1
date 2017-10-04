@@ -46,4 +46,34 @@ public class ItemList<T>{
 			this.next.insert(object, --index);
 		}
 	}
+	public T get(int index) {
+		if (index == 0)
+			return this.retrieve();
+		else
+			return this.next().get(--index);
+	}
+	public void set(int index, T object) {
+		if(index == 0)
+			this.object = object;
+		else
+			this.set(--index, object);
+	}
+	public void remove(int index) {
+		if(index == 0) {
+			this.object = this.next.object;
+			this.next = this.next.next;
+		}
+		else
+			this.next.remove(--index);
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String str = this.retrieve().toString() + "\n";
+		str += this.next() == null?"":this.next().toString();
+		return str;
+	}
 }

@@ -42,9 +42,11 @@ public class SystemAPI {
 	public void readCSV(String filename) throws Exception {
 		BufferedReader file = new BufferedReader(new FileReader(filename));
 		String str = "";
+		str = file.readLine();
 		while(str!=null) {
-			str=file.readLine();
+			System.out.println(str);
 			String[] params = str.split(",");
+			System.out.println(params.length);
 			Property prop = new Property(params[0], Integer.parseInt(params[1]), Integer.parseInt(params[2]));
 			for(int i=3;i<params.length;) {
 				Boolean ensuite = params[i]=="RoomES";
@@ -54,6 +56,8 @@ public class SystemAPI {
 					room.addBed(new Bed(params[++i], Float.parseFloat(params[++i])));
 				}
 			}
+			addProperty(prop);
+			str=file.readLine();
 		}
 		file.close();
 	}
@@ -72,14 +76,15 @@ public class SystemAPI {
 		
 	}
 	public void viewProperty() {
-		ItemList<Property> head = properties;
-		while(head != null) {
-			System.out.println(head.retrieve());
-			head=head.next();
-		}
+		System.out.println(properties);
 	}
 	public void viewProperty(String address) {
-		
+		ItemList<Property> head = properties;
+		while(head != null) {
+			if(head.retrieve().getAddress().equals(address))
+				System.out.println(head.retrieve());
+			head = head.next();
+		}
 	}
 	public void addProperty(Property property) {
 		if(properties == null)
