@@ -162,6 +162,11 @@ class Menu {
 				out.println(bed);
 				system.assignStudentBed(stud, bed);
 				out.println("Assigned.");
+				break;
+			case 2:
+				out.println("Enter student ID: ");
+				int uid = Menu.getInt();
+				system.removeStudentBed(system.searchStudent(uid));
 			case 0:
 				inMenu=false;
 				break;
@@ -180,12 +185,12 @@ class Menu {
 				inMenu=false;
 				break;
 			case 1:
-				system.viewProperty();
+				out.print(system.viewProperty());
 				in.nextLine();
 				break;
 			case 2:
 				out.println("Please enter the address of the property you would like to view\n>");
-				system.viewProperty(in.nextLine());
+				out.print(system.viewProperty(in.nextLine()));
 				in.nextLine();
 				break;
 			case 3:

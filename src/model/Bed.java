@@ -11,7 +11,7 @@ public class Bed {
 	private Type type;
 	private float cost;
 	private int uid;
-	private ItemList<Student> student = null;
+	private Student student = null;
 	/**
 	 * @param type
 	 * @param cost
@@ -68,23 +68,23 @@ public class Bed {
 	 * @return the student
 	 */
 	public Student getStudent() {
-		return (Student) student.retrieve();
+		return student;
 	}
 	/**
 	 * @param student the student to set
 	 */
 	public void setStudent(Student student) {
-		if(type == Type.BUNK && this.student != null)
-			this.student.append(student);
-		else
-			this.student = new ItemList<Student>(student);
+		this.student = student;
 	}
 	
-	@Override
-	public String toString() {
+	public String toCSV() {
 		return type.toString() + ", " + cost;
 	}
-	public void removeStudent(Student student) {
+	public String toString() {
+		return "Bed no. " + uid + ": " + type + " " + cost + (student==null?" Free":(" [" + student + "]"));
+	}
+	public void removeStudent() {
+		this.student = null;
 	}
 	
 

@@ -11,15 +11,11 @@ import model.*;
  *
  */
 public class SystemAPI {
-	ItemList<Bed> beds;
 	ItemList<Student> students;
 	ItemList<Property> properties;
-	ItemList<Room> rooms;
 	public SystemAPI() {
-		this.beds = null;
 		this.students = null;
 		this.properties = null;
-		this.rooms = null;
 	}
 	public ItemList<Bed> listBeds() {
 		ItemList<Property> property = properties;
@@ -28,9 +24,14 @@ public class SystemAPI {
 			ItemList<Room> room = property.retrieve().listRooms();
 			while(room != null) {
 				if(beds == null)
-					beds = room.retrieve().getBeds();
-				else
-					beds.append(room.retrieve().getBeds());
+					beds = new ItemList<Bed>(room.retrieve().getBeds().retrieve(), room.retrieve().getBeds().next());
+				else {
+					ItemList<Bed> head = room.retrieve().getBeds();
+					while(head != null) {
+						beds.append(head.retrieve());
+						head = head.next();
+					}
+				}
 				room = room.next();
 			}
 			property = property.next();
@@ -60,7 +61,6 @@ public class SystemAPI {
 		String str = "";
 		str = file.readLine();
 		while(str!=null) {
-			System.out.println(str);
 			String[] params = str.split(", ");
 			Property prop = new Property(params[0], Integer.parseInt(params[1]), Integer.parseInt(params[2]));
 			for(int i = 3;i<params.length;) {
@@ -86,16 +86,18 @@ public class SystemAPI {
 		student.setBed(bed);
 	}
 	public void removeStudentBed(Student student) {
-		student.getBed().removeStudent(student);
+		student.getBed().removeStudent();
 		student.setBed(null);
 	}
-	public void viewProperty() {
+	public String viewProperty() {
 		ItemList<Property> list = properties;
+		String str = "";
 		while(list != null) {
-			viewProperty(list.retrieve().getAddress());
-			System.out.println("----------------");
+			str += viewProperty(list.retrieve().getAddress());
+			str += "----------------" + "\n";
 			list = list.next();
 		}
+		return str;
 	}
 	public Property searchProperty(String address) {
 		ItemList<Property> head = properties;
@@ -106,43 +108,41 @@ public class SystemAPI {
 		}
 		return null;
 	}
-	public void viewProperty(String address) {
+	public String viewProperty(String address) {
 		Property prop = searchProperty(address);
-		System.out.println("Address: " + prop.getAddress());
-		System.out.println("Distance (km) from WIT: " + prop.getDistance());
-		System.out.println("Available car park spaces: " + prop.getSpaces());
-		System.out.println("Available rooms: ");
+		String str = "";
+		str += "Address: " + prop.getAddress() + "\n";
+		str += "Distance (km) from WIT: " + prop.getDistance() + "\n";
+		str += "Available car park spaces: " + prop.getSpaces() + "\n";
+		str += "Available rooms: " + "\n";
 		for(int i = 0; i<100; i++) {
 			ItemList<Room> list = prop.listRooms(i);
 			if(list != null)
-				System.out.println("Floor " + i);
+				str += "Floor " + i + "\n";
 			while(list != null) {
 				String beds = list.retrieve().getBeds()==null?"":(" and " + list.retrieve().getBeds().length() + " beds.");
-				System.out.println("Room with" + (list.retrieve().hasEnsuite()?"":"out") + " ensuite" + beds);
+				str += "Room with" + (list.retrieve().hasEnsuite()?"":"out") + " ensuite" + beds + "\n";
 				list = list.next();
 			}
 		}
+		return str;
 	}
 	public void addProperty(Property property) {
-		if(searchProperty(property.getAddress())!=null)
-			System.out.println("That address already exists");
-		else {
+		if(searchProperty(property.getAddress())==null)
+		{
 			if(properties == null)
 				properties= new ItemList<Property>(property);
 			else
 				properties.append(property);
-			System.out.println("Property added.");
 		}
 	}
 	public void addStudent(Student student) {
-		if(searchStudent(student.getSid())!=null)
-			System.out.println("That student already exists");
-		else {
+		if(searchStudent(student.getSid())==null)
+		{
 			if(students == null)
 				students = new ItemList<Student>(student);
 			else
 				students.append(student);
-			System.out.println("Student added.");
 	}
 }
 	public Student searchStudent(int sid) {

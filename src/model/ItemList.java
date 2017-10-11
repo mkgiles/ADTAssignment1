@@ -73,12 +73,6 @@ public class ItemList<T>{
 		return str;
 	}
 	public String toString() {
-		return this.retrieve() + "\n" + (this.next!=null?this.next:"");
-	}
-	public void append(ItemList<T> list) {
-		if(this.next == null)
-			this.next = list;
-		else
-			this.next.append(list);
+		return this.retrieve() + "\n" + (this.next==null?"":this.next);
 	}
 }
