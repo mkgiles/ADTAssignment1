@@ -18,22 +18,15 @@ public class Bed {
 	 * @param uid
 	 * @param student
 	 */
+	public Bed(int type, float cost) {
+		this.cost = cost;
+		this.uid = uuid++;
+		this.type = Type.values()[type];
+	}
 	public Bed(String type, float cost) {
 		this.cost = cost;
 		this.uid = uuid++;
-		switch(type.toLowerCase()) {
-			case "single":
-				this.type = Type.SINGLE;
-				break;
-			case "double":
-				this.type = Type.DOUBLE;
-				break;
-			case "bunk":
-				this.type = Type.BUNK;
-				break;
-			default:
-				this.type = Type.SINGLE;
-		}
+		this.type = Type.valueOf(type);
 	}
 	/**
 	 * @return the type
@@ -86,18 +79,13 @@ public class Bed {
 		else
 			this.student = new ItemList<Student>(student);
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	
 	@Override
 	public String toString() {
 		return type.toString() + ", " + cost;
 	}
-	public void removeStudent(Student student2) {
-		// TODO Auto-generated method stub
-		
+	public void removeStudent(Student student) {
 	}
-	
 	
 
 }

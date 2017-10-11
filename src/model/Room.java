@@ -31,7 +31,7 @@ public class Room {
 	/**
 	 * @return the ensuite
 	 */
-	public Boolean isEnsuite() {
+	public Boolean hasEnsuite() {
 		return ensuite;
 	}
 	/**
@@ -50,7 +50,10 @@ public class Room {
 	 * @param beds the beds to set
 	 */
 	public void addBed(Bed bed) {
-		beds.append(bed);
+		if(beds == null)
+			beds = new ItemList<Bed>(bed);
+		else
+			beds.append(bed);
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -59,7 +62,11 @@ public class Room {
 	public String toString() {
 		String str = "";
 		str += ensuite?"RoomES, ":"RoomNES, ";
-		str += "$(member.value}, $(member.value}";
+		str += floor;
+		if(beds != null) {
+			str += ", ";
+			str += beds.toCSV(", ");
+		}
 		return str;
 	}
 	

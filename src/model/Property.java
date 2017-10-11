@@ -59,13 +59,39 @@ public class Property {
 	 * @param rooms the rooms to set
 	 */
 	public void addRoom(Room room) {
-		rooms.append(room);				
+		if(rooms == null)
+			rooms = new ItemList<Room>(room);
+		else
+			rooms.append(room);
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return address + "," + distance + "," + spaces + "";
+		String str = address + ", " + distance + ", " + spaces;
+		if(rooms!=null) {
+			str += ", ";
+			str += rooms.toCSV(", ");
+		}
+		return str;
+	}
+	public ItemList<Room> listRooms(int storey) {
+		ItemList<Room> temp = null;
+		ItemList<Room> head = rooms;
+		while(head != null) {
+			if(head.retrieve().getFloor() == storey) {
+				if(temp == null) {
+					temp = new ItemList<Room>(head.retrieve());
+				}
+				else
+					temp.append(head.retrieve());
+			}
+			head = head.next();
+		}
+		return temp;
+	}
+	public ItemList<Room> listRooms(){
+		return rooms;
 	}
 }

@@ -66,14 +66,19 @@ public class ItemList<T>{
 		else
 			this.next.remove(--index);
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
+	public String toCSV(String divider) {
 		// TODO Auto-generated method stub
-		String str = this.retrieve().toString() + "\n";
-		str += this.next() == null?"":this.next().toString();
+		String str = this.retrieve().toString();
+		str += this.next() == null?"":(divider + this.next().toCSV(divider));
 		return str;
+	}
+	public String toString() {
+		return this.retrieve() + "\n" + (this.next!=null?this.next:"");
+	}
+	public void append(ItemList<T> list) {
+		if(this.next == null)
+			this.next = list;
+		else
+			this.next.append(list);
 	}
 }

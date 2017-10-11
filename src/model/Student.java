@@ -1,4 +1,5 @@
 package model;
+
 /**
  * @author Conor James Giles
  *
@@ -15,14 +16,12 @@ public class Student {
 	 * @param gender
 	 * @param car
 	 * @param sid
-	 * @param bed
 	 */
-	public Student(String name, Boolean gender, Boolean car, int sid, Bed bed) {
+	public Student(String name, Boolean gender, Boolean car, int sid) {
 		this.name = name;
 		this.gender = gender;
 		this.car = car;
 		this.sid = sid;
-		this.bed = bed;
 	}
 	/**
 	 * @return the bed
@@ -59,5 +58,8 @@ public class Student {
 	 */
 	public int getSid() {
 		return sid;
+	}
+	public String toString() {
+		return "Student no: " + sid + ". " + name + " (" + (gender?"female":"male") + " " + (car?"car":"no car") + ")";
 	}
 }
