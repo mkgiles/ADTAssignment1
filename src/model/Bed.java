@@ -3,7 +3,7 @@ package model;
  * @author Conor James Giles
  *
  */
-public class Bed {
+public class Bed implements CSV{
 	private static int uuid = 0;
 	private static enum Type {
 		SINGLE, DOUBLE, BUNK
@@ -77,11 +77,12 @@ public class Bed {
 		this.student = student;
 	}
 	
-	public String toCSV() {
-		return type.toString() + ", " + cost;
-	}
 	public String toString() {
 		return "Bed no. " + uid + ": " + type + " " + cost + (student==null?" Free":(" [" + student + "]"));
+	}
+	@Override
+	public String toCSV() {
+		return type.toString() + ", " + cost;
 	}
 	public void removeStudent() {
 		this.student = null;

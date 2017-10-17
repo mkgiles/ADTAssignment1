@@ -4,7 +4,7 @@ package model;
  * @author Conor James Giles
  *
  */
-public class ItemList<T>{
+public class ItemList<T extends CSV>{
 	private ItemList<T> next = null;
 	private T object;
 	public ItemList(T object) {
@@ -67,8 +67,7 @@ public class ItemList<T>{
 			this.next.remove(--index);
 	}
 	public String toCSV(String divider) {
-		// TODO Auto-generated method stub
-		String str = this.retrieve().toString();
+		String str = this.retrieve().toCSV();
 		str += this.next() == null?"":(divider + this.next().toCSV(divider));
 		return str;
 	}

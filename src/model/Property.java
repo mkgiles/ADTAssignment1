@@ -3,7 +3,7 @@ package model;
  * @author Conor James Giles
  *
  */
-public class Property {
+public class Property implements CSV{
 	private String address;
 	private int distance;
 	private int spaces;
@@ -68,7 +68,7 @@ public class Property {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
-	public String toString() {
+	public String toCSV() {
 		String str = address + ", " + distance + ", " + spaces;
 		if(rooms!=null) {
 			str += ", ";

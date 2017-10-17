@@ -3,7 +3,7 @@ package model;
  * @author Conor James Giles
  *
  */
-public class Room {
+public class Room implements CSV{
 	private int floor;
 	private Boolean ensuite;
 	private ItemList<Bed> beds;
@@ -55,11 +55,8 @@ public class Room {
 		else
 			beds.append(bed);
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
-	public String toString() {
+	public String toCSV() {
 		String str = "";
 		str += ensuite?"RoomES, ":"RoomNES, ";
 		str += floor;
@@ -69,7 +66,5 @@ public class Room {
 		}
 		return str;
 	}
-	
-	
 
 }

@@ -4,7 +4,7 @@ package model;
  * @author Conor James Giles
  *
  */
-public class Student {
+public class Student implements CSV{
 
 	private String name;
 	private Boolean gender;
@@ -61,5 +61,10 @@ public class Student {
 	}
 	public String toString() {
 		return "Student no: " + sid + ". " + name + " (" + (gender?"female":"male") + " " + (car?"car":"no car") + ")";
+	}
+	@Override
+	public String toCSV() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

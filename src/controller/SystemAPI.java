@@ -76,6 +76,11 @@ public class SystemAPI {
 		}
 		file.close();
 	}
+//	public void readCSV(String filename) throws Exception {
+//		BufferedReader file = new BufferedReader(new FileReader(filename));
+//		properties = new ItemList<Property>(null);
+//		properties.fromCSV(file);
+//	}
 	public void writeCSV(String filename) throws Exception {
 		FileWriter file = new FileWriter(filename);
 		file.write(properties.toCSV("\n"));
