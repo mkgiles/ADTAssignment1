@@ -50,7 +50,7 @@ public class Student implements CSV{
 	/**
 	 * @return the car
 	 */
-	public Boolean getCar() {
+	public Boolean hasCar() {
 		return car;
 	}
 	/**
@@ -64,7 +64,6 @@ public class Student implements CSV{
 	}
 	@Override
 	public String toCSV() {
-		// TODO Auto-generated method stub
-		return null;
+		return "" + sid + ", " + "name" + ", " + (gender?"F":"M") + ", " + (car?"car":"ncar") + ", " + (bed==null?"unassigned":("" + bed.getUid() + ", " + bed.toCSV()));
 	}
 }

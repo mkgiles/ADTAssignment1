@@ -14,6 +14,10 @@ public class ItemList<T extends CSV>{
 		this.object = object;
 		this.next = list;
 	}
+	public ItemList() {
+		this.object = null;
+		this.next = null;
+	}
 	public ItemList<T> next(){
 		return next;
 	}
@@ -52,6 +56,17 @@ public class ItemList<T extends CSV>{
 		else
 			return this.next().get(--index);
 	}
+	public int getIndexOf(T object) {
+		return getIndexOf(object, 0);
+	}
+	private int getIndexOf(T object, int index) {
+		if(this.object.equals(object))
+			return index;
+		else if(this.next == null)
+			return -1;
+		else
+			return this.next.getIndexOf(object, ++index);
+	}
 	public void set(int index, T object) {
 		if(index == 0)
 			this.object = object;
@@ -60,11 +75,18 @@ public class ItemList<T extends CSV>{
 	}
 	public void remove(int index) {
 		if(index == 0) {
-			this.object = this.next.object;
-			this.next = this.next.next;
+			if(this.next!=null) {
+				this.object = this.next.object;
+				this.next = this.next.next;
+			}
 		}
-		else
-			this.next.remove(--index);
+		else {
+			if(this.next != null)
+				if(this.next.next != null)
+					this.next.remove(--index);
+				else
+					this.next = null;
+		}
 	}
 	public String toCSV(String divider) {
 		String str = this.retrieve().toCSV();

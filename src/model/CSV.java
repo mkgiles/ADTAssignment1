@@ -9,5 +9,4 @@ package model;
  */
 public interface CSV {
 	String toCSV();
-//	void fromCSV();
 }

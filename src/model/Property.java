@@ -64,9 +64,6 @@ public class Property implements CSV{
 		else
 			rooms.append(room);
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toCSV() {
 		String str = address + ", " + distance + ", " + spaces;

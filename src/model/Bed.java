@@ -12,6 +12,7 @@ public class Bed implements CSV{
 	private float cost;
 	private int uid;
 	private Student student = null;
+	private Student bunkmate = null;
 	/**
 	 * @param type
 	 * @param cost
@@ -31,8 +32,8 @@ public class Bed implements CSV{
 	/**
 	 * @return the type
 	 */
-	public Type getType() {
-		return type;
+	public String getType() {
+		return type.toString();
 	}
 	/**
 	 * @param type the type to set
@@ -74,18 +75,32 @@ public class Bed implements CSV{
 	 * @param student the student to set
 	 */
 	public void setStudent(Student student) {
-		this.student = student;
+		if(this.type!=Type.BUNK)
+			this.student = student;
+		else {
+			if(this.student!=null)
+				this.bunkmate=student;
+			else
+				this.student=student;
+		}
 	}
 	
 	public String toString() {
-		return "Bed no. " + uid + ": " + type + " " + cost + (student==null?" Free":(" [" + student + "]"));
+		return "Bed no. " + uid + ": " + type + " " + cost + (type==Type.BUNK?(" Top Bunk:" + (student==null?" Free":(" [" + student + "]")) + "; Bottom Bunk:" + (bunkmate==null?" Free":(" [" + bunkmate + "]"))):(student==null?" Free":(" [" + student + "]")));
 	}
 	@Override
 	public String toCSV() {
 		return type.toString() + ", " + cost;
 	}
-	public void removeStudent() {
-		this.student = null;
+	public void removeStudent(Student student) {
+		if(this.student == student)
+			this.student = null;
+		if(this.bunkmate == student)
+			this.bunkmate = null;
+	}
+
+	public Student getBunkmate() {
+		return bunkmate;
 	}
 	
 
