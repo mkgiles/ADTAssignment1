@@ -34,7 +34,7 @@ class Menu {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args){
 		Menu.menu();
 	}
 
@@ -44,7 +44,7 @@ class Menu {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static void menu() throws Exception {
+	public static void menu(){
 		out.println("Welcome to the WIT Student Accomodation Management Tool.\nPress Enter to begin.");
 		in.nextLine();
 		while (true) {
@@ -86,8 +86,7 @@ class Menu {
 	public static void addMenu() {
 		Boolean inMenu = true;
 		while (inMenu == true) {
-			out.println(
-					"Please select an option:\n1)Add new Property\n2)Add new Room\n3)Add new Bed\n4)Add new Student\n5)Remove property\n6)Remove room\n7)Remove bed\n8)Remove student\n0)Return to Main Menu\n>");
+			out.println("Please select an option:\n1)Add new Property\n2)Add new Room\n3)Add new Bed\n4)Add new Student\n5)Remove property\n6)Remove room\n7)Remove bed\n8)Remove student\n0)Return to Main Menu\n>");
 			switch (Menu.getInt()) {
 			case 0:
 				inMenu = false;
@@ -190,7 +189,7 @@ class Menu {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static void saveLoadMenu() throws Exception {
+	public static void saveLoadMenu() {
 		Boolean inMenu = true;
 		while (inMenu == true) {
 			out.println(
@@ -201,19 +200,35 @@ class Menu {
 				break;
 			case 1:
 				out.println("Please enter the name of the file you want to save to:\n>");
-				system.writePropertyCSV(in.nextLine());
+				try {
+					system.writePropertyCSV(in.nextLine());
+				}catch(Exception e) {
+					out.println("Failed to write save file.");
+				}
 				break;
 			case 2:
 				out.println("Please enter the name of the file you want to save to:\n>");
-				system.writeStudentCSV(in.nextLine());
+				try {
+					system.writeStudentCSV(in.nextLine());
+				}catch(Exception e) {
+					out.println("Failed to write save file.");
+				}
 				break;
 			case 3:
 				out.println("Please enter the name of the file you want to load from:\n>");
-				system.readPropertyCSV(in.nextLine());
+				try {
+					system.readPropertyCSV(in.nextLine());
+				}catch(Exception e) {
+					out.println("Failed to read save file. Either malformed or not present.");
+				}
 				break;
 			case 4:
 				out.println("Please enter the name of the file you want to load from:\n>");
-				system.readStudentCSV(in.nextLine());
+				try {
+					system.readStudentCSV(in.nextLine());
+				}catch(Exception e) {
+					out.println("Failed to read save file. Either malformed or not present.");
+				}
 				break;
 			default:
 				out.println("Invalid index, please try again.");
