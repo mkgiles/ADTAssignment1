@@ -129,6 +129,8 @@ public class ItemList<T extends CSV> {
 	public T get(int index) {
 		if (index == 0)
 			return this.retrieve();
+		if(this.next() == null)
+			return null;
 		else
 			return this.next().get(--index);
 	}

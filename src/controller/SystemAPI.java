@@ -239,7 +239,10 @@ public class SystemAPI {
 	 *            the property
 	 */
 	public void removeProperty(Property property) {
-		properties.remove(properties.getIndexOf(property));
+		if(properties.length()>1)
+			properties.remove(properties.getIndexOf(property));
+		else
+			properties = null;
 	}
 
 	/**
