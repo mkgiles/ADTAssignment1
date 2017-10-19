@@ -38,14 +38,13 @@ public class SystemAPI {
 		while (property != null) {
 			ItemList<Room> room = property.retrieve().listRooms();
 			while (room != null) {
-				if (beds == null)
-					beds = new ItemList<Bed>(room.retrieve().getBeds().retrieve(), room.retrieve().getBeds().next());
-				else {
-					ItemList<Bed> head = room.retrieve().getBeds();
-					while (head != null) {
+				ItemList<Bed> head = room.retrieve().getBeds();
+				while (head != null) {
+					if(beds == null)
+						beds = new ItemList<Bed>(head.retrieve());
+					else
 						beds.append(head.retrieve());
-						head = head.next();
-					}
+					head = head.next();
 				}
 				room = room.next();
 			}
@@ -268,7 +267,10 @@ public class SystemAPI {
 	 *            the student
 	 */
 	public void removeStudent(Student student) {
-		students.remove(students.getIndexOf(student));
+		if(students.length() > 1)
+			students.remove(students.getIndexOf(student));
+		else
+			students = null;
 	}
 
 	/**
@@ -291,20 +293,22 @@ public class SystemAPI {
 			if (list != null)
 				str += "Floor " + i + "\n";
 			while (list != null) {
-				String beds = list.retrieve().getBeds() == null ? ""
-						: (" and " + list.retrieve().getBeds().length() + " beds.");
+				String beds = list.retrieve().getBeds() == null ? "": (" and " + list.retrieve().getBeds().length() + " beds.");
 				str += "Room with" + (list.retrieve().hasEnsuite() ? "" : "out") + " ensuite" + beds + "\n";
 				if (list.retrieve().getBeds() != null) {
 					str += "Beds:\n";
 					for (ItemList<Bed> head = list.retrieve().getBeds(); head != null; head = head.next()) {
 						str += head.retrieve() + "\n";
-						profit += head.retrieve().getCost();
+						if(head.retrieve().getStudent() != null)
+							profit += head.retrieve().getCost();
+						if(head.retrieve().getBunkmate()!=null)
+							profit += head.retrieve().getCost();
 					}
 				}
 				list = list.next();
 			}
 		}
-		str += "Total profit: " + profit;
+		str += "Total profit: " + profit + "\n";
 		return str;
 	}
 

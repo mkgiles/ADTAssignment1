@@ -27,7 +27,7 @@ public class Bed implements CSV {
 	private Type type;
 
 	/** The cost. */
-	private float cost;
+	private double cost;
 
 	/** The uid. */
 	private int uid;
@@ -46,7 +46,7 @@ public class Bed implements CSV {
 	 * @param cost
 	 *            the cost
 	 */
-	public Bed(int type, float cost) {
+	public Bed(int type, double cost) {
 		this.cost = cost;
 		this.uid = uuid++;
 		this.type = Type.values()[type];
@@ -90,7 +90,7 @@ public class Bed implements CSV {
 	 *
 	 * @return the cost
 	 */
-	public float getCost() {
+	public double getCost() {
 		return cost;
 	}
 
