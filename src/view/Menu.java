@@ -1,4 +1,5 @@
 package view;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -8,23 +9,48 @@ import model.ItemList;
 import model.Property;
 import model.Room;
 import model.Student;
+
 /**
- * @author Conor James Giles
+ * The Class Menu.
  *
+ * @author Conor James Giles
  */
 class Menu {
+
+	/** The in. */
 	private static Scanner in = new Scanner(System.in);
+
+	/** The out. */
 	private static PrintStream out = System.out;
+
+	/** The system. */
 	private static SystemAPI system = new SystemAPI();
+
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 * @throws Exception
+	 *             the exception
+	 */
 	public static void main(String[] args) throws Exception {
 		Menu.menu();
 	}
+
+	/**
+	 * Menu.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	public static void menu() throws Exception {
 		out.println("Welcome to the WIT Student Accomodation Management Tool.\nPress Enter to begin.");
 		in.nextLine();
-		while(true) {
-			out.println("Please select an option:\n1)Add new entities\n2)Save/Load properties\n3)Assign beds to students\n4)View property data\n0)Quit\n>");
-			switch(Menu.getInt()) {
+		while (true) {
+			out.println(
+					"Please select an option:\n1)Add new entities\n2)Save/Load properties\n3)Assign beds to students\n4)View property data\n0)Quit\n>");
+			switch (Menu.getInt()) {
 			case 0:
 				Menu.quit();
 				break;
@@ -46,16 +72,25 @@ class Menu {
 			}
 		}
 	}
+
+	/**
+	 * Quit.
+	 */
 	public static void quit() {
 		System.exit(0);
 	}
+
+	/**
+	 * Adds the menu.
+	 */
 	public static void addMenu() {
 		Boolean inMenu = true;
-		while(inMenu == true) {
-			out.println("Please select an option:\n1)Add new Property\n2)Add new Room\n3)Add new Bed\n4)Add new Student\n0)Return to Main Menu\n>");
-			switch(Menu.getInt()) {
+		while (inMenu == true) {
+			out.println(
+					"Please select an option:\n1)Add new Property\n2)Add new Room\n3)Add new Bed\n4)Add new Student\n5)Remove property\n6)Remove room\n7)Remove bed\n8)Remove student\n0)Return to Main Menu\n>");
+			switch (Menu.getInt()) {
 			case 0:
-				inMenu=false;
+				inMenu = false;
 				break;
 			case 1:
 				out.println("Please enter the address of your new Property: ");
@@ -89,11 +124,11 @@ class Menu {
 				out.println("Please enter the floor of the room you want to add a bed to:");
 				int storey = Menu.getInt();
 				ItemList<Room> rooms = prp.listRooms(storey);
-				if(rooms == null) {
+				if (rooms == null) {
 					out.println("No rooms on that floor");
 					break;
 				}
-				for(int i = 0; i<rooms.length(); i++) {
+				for (int i = 0; i < rooms.length(); i++) {
 					out.println("" + i + rooms.get(i));
 				}
 				out.println("Select a room from the list:");
@@ -118,19 +153,51 @@ class Menu {
 				Student stud = new Student(name, sex, car, sid);
 				system.addStudent(stud);
 				break;
+			case 5:
+				out.println("Please enter the address of the property you want to remove: ");
+				system.removeProperty(system.searchProperty(in.nextLine()));
+				break;
+			case 6:
+				out.println("Please enter the address of the property you want to remove a room from: ");
+				Property place = system.searchProperty(in.nextLine());
+				out.println("Please enter the floor of the room you want to remove: ");
+				int flr = Menu.getInt();
+				ItemList<Room> rm = place.listRooms(flr);
+				for (int i = 0; i < rm.length(); i++) {
+					out.println("" + i + rm.get(i));
+				}
+				out.println("Please select a room from the list: ");
+				place.removeRoom(flr, Menu.getInt());
+				break;
+			case 7:
+				out.println("Please enter the ID of the bed you wish to remove: ");
+				system.removeBed(system.searchBed(Menu.getInt()));
+				break;
+			case 8:
+				out.println("Please enter the ID of the student you wish to remove: ");
+				system.removeStudent(system.searchStudent(Menu.getInt()));
+				break;
 			default:
 				out.println("Invalid index, please try again.");
 				in.nextLine();
 			}
 		}
 	}
+
+	/**
+	 * Save load menu.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	public static void saveLoadMenu() throws Exception {
 		Boolean inMenu = true;
-		while(inMenu == true) {
-			out.println("Please select an option:\n1)Save properties\n2)Save Students\n3)Load properties\n4)Load Students\n0)Return to Main Menu\n>");
-			switch(Menu.getInt()) {
+		while (inMenu == true) {
+			out.println(
+					"Please select an option:\n1)Save properties\n2)Save Students\n3)Load properties\n4)Load Students\n0)Return to Main Menu\n>");
+			switch (Menu.getInt()) {
 			case 0:
-				inMenu=false;
+				inMenu = false;
 				break;
 			case 1:
 				out.println("Please enter the name of the file you want to save to:\n>");
@@ -154,11 +221,16 @@ class Menu {
 			}
 		}
 	}
+
+	/**
+	 * Assignment menu.
+	 */
 	public static void assignmentMenu() {
 		Boolean inMenu = true;
-		while(inMenu == true) {
-			out.println("Please select an option:\n1)Assign Bed to Student\n2)Remove Student from Bed\n0)Return to Main Menu\n>");
-			switch(Menu.getInt()) {
+		while (inMenu == true) {
+			out.println(
+					"Please select an option:\n1)Assign Bed to Student\n2)Remove Student from Bed\n0)Return to Main Menu\n>");
+			switch (Menu.getInt()) {
 			case 1:
 				out.println("Please enter Student ID: ");
 				int sid = Menu.getInt();
@@ -177,7 +249,7 @@ class Menu {
 				system.removeStudentBed(system.searchStudent(uid));
 				break;
 			case 0:
-				inMenu=false;
+				inMenu = false;
 				break;
 			default:
 				out.println("Invalid index, please try again.");
@@ -185,13 +257,18 @@ class Menu {
 			}
 		}
 	}
+
+	/**
+	 * View menu.
+	 */
 	public static void viewMenu() {
 		Boolean inMenu = true;
-		while(inMenu == true) {
-			out.println("Please select an option:\n1)View all properties\n2)View property at an address\n3)View all beds\n4)View all free beds\n5)View all students\n6)Search for beds with particular parameters\n7)Get address of a bed.\n8)Get address of student\n0)Return to Main Menu\n>");
-			switch(Menu.getInt()) {
+		while (inMenu == true) {
+			out.println(
+					"Please select an option:\n1)View all properties\n2)View property at an address\n3)View all beds\n4)View all free beds\n5)View all students\n6)Search for beds with particular parameters\n7)Get address of a bed.\n8)Get address of student\n0)Return to Main Menu\n>");
+			switch (Menu.getInt()) {
 			case 0:
-				inMenu=false;
+				inMenu = false;
 				break;
 			case 1:
 				out.print(system.viewProperty());
@@ -217,33 +294,32 @@ class Menu {
 			case 6:
 				String queries[] = new String[6];
 				out.println("Do you wish to set a max distance from the college?");
-				if(Menu.getBool()) {
+				if (Menu.getBool()) {
 					out.println("Enter max distance: ");
 					queries[0] = "" + Menu.getInt();
 				}
 				out.println("Do you wish to find a property with available parking space?");
-				if(Menu.getBool())
+				if (Menu.getBool())
 					queries[1] = "true";
 				out.println("Do you wish to set a max floor height?");
-				if(Menu.getBool()) {
+				if (Menu.getBool()) {
 					out.println("Please enter a max height: ");
 					queries[2] = "" + Menu.getInt();
 				}
 				out.println("Do you wish to be in a single sex property/room?");
-				if(Menu.getBool()) {
+				if (Menu.getBool()) {
 					out.println("Do you want to be in a single sex property?");
-					if(Menu.getBool()) {
+					if (Menu.getBool()) {
 						out.println("Male or female?");
-						if(in.nextLine().toLowerCase().charAt(0) == 'm')
+						if (in.nextLine().toLowerCase().charAt(0) == 'm')
 							queries[3] = "0";
 						else
 							queries[3] = "2";
-					}
-					else {
+					} else {
 						out.println("Room?");
-						if(Menu.getBool()) {
+						if (Menu.getBool()) {
 							out.println("Male or female?");
-							if(in.nextLine().toLowerCase().charAt(0) == 'm')
+							if (in.nextLine().toLowerCase().charAt(0) == 'm')
 								queries[3] = "1";
 							else
 								queries[3] = "3";
@@ -251,10 +327,10 @@ class Menu {
 					}
 				}
 				out.println("Do you need an en-suite?");
-				if(Menu.getBool())
+				if (Menu.getBool())
 					queries[4] = "true";
 				out.println("Do you want to set a max cost?");
-				if(Menu.getBool()) {
+				if (Menu.getBool()) {
 					out.println("Please enter a max cost:");
 					queries[5] = "" + Menu.getFloat();
 				}
@@ -263,7 +339,7 @@ class Menu {
 				break;
 			case 7:
 				out.println("Please enter the ID of the bed you are searching for: ");
-				int bid =Menu.getInt();
+				int bid = Menu.getInt();
 				Bed bed = system.searchBed(bid);
 				out.println(system.getAddress(bed));
 				in.nextLine();
@@ -281,19 +357,37 @@ class Menu {
 			}
 		}
 	}
+
+	/**
+	 * Gets the int.
+	 *
+	 * @return the int
+	 */
 	private static int getInt() {
 		int i = in.nextInt();
 		in.nextLine();
 		return i;
 	}
+
+	/**
+	 * Gets the float.
+	 *
+	 * @return the float
+	 */
 	private static float getFloat() {
 		float f = in.nextFloat();
 		in.nextLine();
 		return f;
 	}
+
+	/**
+	 * Gets the bool.
+	 *
+	 * @return the bool
+	 */
 	private static Boolean getBool() {
 		String temp = in.nextLine();
-		if(temp.toLowerCase().charAt(0) == 'n')
+		if (temp.toLowerCase().charAt(0) == 'n')
 			return false;
 		return true;
 	}

@@ -1,94 +1,165 @@
 package model;
+
 /**
- * @author Conor James Giles
+ * The Class Property.
  *
+ * @author Conor James Giles
  */
-public class Property implements CSV{
+public class Property implements CSV {
+
+	/** The address. */
 	private String address;
+
+	/** The distance. */
 	private int distance;
+
+	/** The spaces. */
 	private int spaces;
+
+	/** The rooms. */
 	private ItemList<Room> rooms;
+
 	/**
+	 * Instantiates a new property.
+	 *
 	 * @param address
+	 *            the address
 	 * @param distance
+	 *            the distance
 	 * @param spaces
-	 * @param rooms
+	 *            the spaces
 	 */
 	public Property(String address, int distance, int spaces) {
 		this.address = address;
 		this.distance = distance;
 		this.spaces = spaces;
 	}
+
 	/**
+	 * Gets the address.
+	 *
 	 * @return the address
 	 */
 	public String getAddress() {
 		return address;
 	}
+
 	/**
-	 * @param address the address to set
+	 * Sets the address.
+	 *
+	 * @param address
+	 *            the address to set
 	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	/**
+	 * Gets the distance.
+	 *
 	 * @return the distance
 	 */
 	public int getDistance() {
 		return distance;
 	}
+
 	/**
-	 * @param distance the distance to set
+	 * Sets the distance.
+	 *
+	 * @param distance
+	 *            the distance to set
 	 */
 	public void setDistance(int distance) {
 		this.distance = distance;
 	}
+
 	/**
+	 * Gets the spaces.
+	 *
 	 * @return the spaces
 	 */
 	public int getSpaces() {
 		return spaces;
 	}
+
 	/**
-	 * @param spaces the spaces to set
+	 * Sets the spaces.
+	 *
+	 * @param spaces
+	 *            the spaces to set
 	 */
 	public void setSpaces(int spaces) {
 		this.spaces = spaces;
 	}
+
 	/**
-	 * @param rooms the rooms to set
+	 * Adds the room.
+	 *
+	 * @param room
+	 *            the room
 	 */
 	public void addRoom(Room room) {
-		if(rooms == null)
+		if (rooms == null)
 			rooms = new ItemList<Room>(room);
 		else
 			rooms.append(room);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.CSV#toCSV()
+	 */
 	@Override
 	public String toCSV() {
 		String str = address + ", " + distance + ", " + spaces;
-		if(rooms!=null) {
+		if (rooms != null) {
 			str += ", ";
 			str += rooms.toCSV(", ");
 		}
 		return str;
 	}
+
+	/**
+	 * List rooms.
+	 *
+	 * @param storey
+	 *            the storey
+	 * @return the item list
+	 */
 	public ItemList<Room> listRooms(int storey) {
 		ItemList<Room> temp = null;
 		ItemList<Room> head = rooms;
-		while(head != null) {
-			if(head.retrieve().getFloor() == storey) {
-				if(temp == null) {
+		while (head != null) {
+			if (head.retrieve().getFloor() == storey) {
+				if (temp == null) {
 					temp = new ItemList<Room>(head.retrieve());
-				}
-				else
+				} else
 					temp.append(head.retrieve());
 			}
 			head = head.next();
 		}
 		return temp;
 	}
-	public ItemList<Room> listRooms(){
+
+	/**
+	 * Removes a room.
+	 *
+	 * @param flr
+	 *            the flr
+	 * @param room
+	 *            the room
+	 */
+	public void removeRoom(int flr, int room) {
+		listRooms().remove(listRooms().getIndexOf(listRooms(flr).get(room)));
+	}
+
+	/**
+	 * List rooms.
+	 *
+	 * @return the item list
+	 */
+	public ItemList<Room> listRooms() {
 		return rooms;
 	}
 }

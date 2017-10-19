@@ -1,107 +1,198 @@
 package model;
+
 /**
- * @author Conor James Giles
+ * The Class Bed.
  *
+ * @author Conor James Giles
  */
-public class Bed implements CSV{
+public class Bed implements CSV {
+
+	/** The uuid. */
 	private static int uuid = 0;
-	private static enum Type {
-		SINGLE, DOUBLE, BUNK
-	}
-	private Type type;
-	private float cost;
-	private int uid;
-	private Student student = null;
-	private Student bunkmate = null;
+
 	/**
+	 * The Enum Type.
+	 */
+	private static enum Type {
+
+		/** The single. */
+		SINGLE,
+		/** The double. */
+		DOUBLE,
+		/** The bunk. */
+		BUNK
+	}
+
+	/** The type. */
+	private Type type;
+
+	/** The cost. */
+	private float cost;
+
+	/** The uid. */
+	private int uid;
+
+	/** The student. */
+	private Student student = null;
+
+	/** The bunkmate. */
+	private Student bunkmate = null;
+
+	/**
+	 * Instantiates a new bed.
+	 *
 	 * @param type
+	 *            the type
 	 * @param cost
-	 * @param uid
-	 * @param student
+	 *            the cost
 	 */
 	public Bed(int type, float cost) {
 		this.cost = cost;
 		this.uid = uuid++;
 		this.type = Type.values()[type];
 	}
+
+	/**
+	 * Instantiates a new bed.
+	 *
+	 * @param type
+	 *            the type
+	 * @param cost
+	 *            the cost
+	 */
 	public Bed(String type, float cost) {
 		this.cost = cost;
 		this.uid = uuid++;
 		this.type = Type.valueOf(type);
 	}
+
 	/**
+	 * Gets the type.
+	 *
 	 * @return the type
 	 */
 	public String getType() {
 		return type.toString();
 	}
+
 	/**
-	 * @param type the type to set
+	 * Sets the type.
+	 *
+	 * @param type
+	 *            the type to set
 	 */
 	public void setType(Type type) {
 		this.type = type;
 	}
+
 	/**
+	 * Gets the cost.
+	 *
 	 * @return the cost
 	 */
 	public float getCost() {
 		return cost;
 	}
+
 	/**
-	 * @param cost the cost to set
+	 * Sets the cost.
+	 *
+	 * @param cost
+	 *            the cost to set
 	 */
 	public void setCost(float cost) {
 		this.cost = cost;
 	}
+
 	/**
+	 * Gets the uid.
+	 *
 	 * @return the uid
 	 */
 	public int getUid() {
 		return uid;
 	}
+
 	/**
-	 * @param uid the uid to set
+	 * Sets the uid.
+	 *
+	 * @param uid
+	 *            the uid to set
 	 */
 	public void setUid(int uid) {
 		this.uid = uid;
 	}
+
 	/**
+	 * Gets the student.
+	 *
 	 * @return the student
 	 */
 	public Student getStudent() {
 		return student;
 	}
+
 	/**
-	 * @param student the student to set
+	 * Sets the student.
+	 *
+	 * @param student
+	 *            the student to set
 	 */
 	public void setStudent(Student student) {
-		if(this.type!=Type.BUNK)
+		if (this.type != Type.BUNK)
 			this.student = student;
 		else {
-			if(this.student!=null)
-				this.bunkmate=student;
+			if (this.student != null)
+				this.bunkmate = student;
 			else
-				this.student=student;
+				this.student = student;
 		}
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
 	public String toString() {
-		return "Bed no. " + uid + ": " + type + " " + cost + (type==Type.BUNK?(" Top Bunk:" + (student==null?" Free":(" [" + student + "]")) + "; Bottom Bunk:" + (bunkmate==null?" Free":(" [" + bunkmate + "]"))):(student==null?" Free":(" [" + student + "]")));
+		return "Bed no. " + uid + ": " + type + " " + cost
+				+ (type == Type.BUNK
+						? (" Top Bunk:" + (student == null ? " Free" : (" [" + student + "]")) + "; Bottom Bunk:"
+								+ (bunkmate == null ? " Free" : (" [" + bunkmate + "]")))
+						: (student == null ? " Free" : (" [" + student + "]")));
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.CSV#toCSV()
+	 */
 	@Override
 	public String toCSV() {
 		return type.toString() + ", " + cost;
 	}
+
+	/**
+	 * Removes the student.
+	 *
+	 * @param student
+	 *            the student
+	 */
 	public void removeStudent(Student student) {
-		if(this.student == student)
+		if (this.student == student)
 			this.student = null;
-		if(this.bunkmate == student)
+		if (this.bunkmate == student)
 			this.bunkmate = null;
 	}
 
+	/**
+	 * Gets the bunkmate.
+	 *
+	 * @return the bunkmate
+	 */
 	public Student getBunkmate() {
 		return bunkmate;
 	}
-	
 
 }
