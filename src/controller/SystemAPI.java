@@ -62,16 +62,23 @@ public class SystemAPI {
 		ItemList<Bed> beds = listBeds();
 		ItemList<Bed> head = beds;
 		for (int i = 0; head != null; i++) {
-			if (head.retrieve().getStudent() != null)
+			if (head.retrieve().getStudent() != null) {
 				if (head.retrieve().getType().equals("BUNK")) {
 					if (head.retrieve().getBunkmate() != null) {
 						head = head.next();
-						beds.remove(i);
+						if(beds.length() == 1)
+							beds = null;
+						else
+							beds.remove(i);
 					}
 				} else {
 					head = head.next();
-					beds.remove(i);
+					if(beds.length() == 1)
+						beds = null;
+					else
+						beds.remove(i);
 				}
+			}
 			else
 				head = head.next();
 			i++;

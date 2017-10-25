@@ -136,7 +136,7 @@ class Menu {
 					break;
 				}
 				for (int i = 0; i < rooms.length(); i++) {
-					out.println("" + i + rooms.get(i));
+					out.println("" + i + ": " + rooms.get(i));
 				}
 				out.println("Select a room from the list:");
 				int roomno = Menu.getInt();

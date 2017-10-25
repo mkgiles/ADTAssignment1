@@ -105,5 +105,12 @@ public class Room implements CSV {
 		}
 		return str;
 	}
-
+	@Override
+	public String toString() {
+		String str = "";
+		str += "Room with" + (ensuite ? " ": "out ") + "ensuite, ";
+		if(beds != null)
+			str += "and " + beds.length() + "beds";
+		return str;
+	}
 }
