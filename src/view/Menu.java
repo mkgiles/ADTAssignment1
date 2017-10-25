@@ -95,7 +95,13 @@ class Menu {
 				int dist = Menu.getInt();
 				out.println("Please enter the number of car park spaces of your Property: ");
 				int spaces = Menu.getInt();
-				system.addProperty(new Property(addr, dist, spaces));
+				try {
+					system.addProperty(new Property(addr, dist, spaces));
+					out.println("Property added");
+				}catch(Exception e){
+					out.println("Failed to add property.");
+					System.err.println(e.getMessage());
+				}
 				in.nextLine();
 				break;
 			case 2:
@@ -110,8 +116,13 @@ class Menu {
 				int floor = Menu.getInt();
 				out.println("Does this room have an ensuite?[Y/n]");
 				Boolean ensuite = Menu.getBool();
-				prop.addRoom(new Room(floor, ensuite));
-				out.println("Room added.");
+				try {
+					prop.addRoom(new Room(floor, ensuite));
+					out.println("Room added.");
+				}catch(Exception e){
+					out.println("Failed to add room.");
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 3:
 				out.println("Please enter the address of the property you are adding a bed to:");
@@ -134,8 +145,13 @@ class Menu {
 				int type = Menu.getInt();
 				out.println("Please enter the cost of the bed:");
 				float cost = Menu.getFloat();
-				room.addBed(new Bed(type, cost));
-				out.println("Bed added");
+				try {
+					room.addBed(new Bed(type, cost));
+					out.println("Bed added");
+				}catch(Exception e){
+					out.println("Failed to add bed.");
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 4:
 				out.println("Please enter the student's name: ");
@@ -151,32 +167,67 @@ class Menu {
 				}catch(Exception e) {
 					System.err.println(e);
 				}
-				Student stud = new Student(name, sex, car, sid);
-				system.addStudent(stud);
+				try {
+					Student stud = new Student(name, sex, car, sid);
+					system.addStudent(stud);
+					out.println("Student added");
+				}catch(Exception e){
+					out.println("Failed to add student.");
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 5:
 				out.println("Please enter the address of the property you want to remove: ");
-				system.removeProperty(system.searchProperty(in.nextLine()));
+				try {
+					system.removeProperty(system.searchProperty(in.nextLine()));
+					out.println("Property removed");
+				}catch(Exception e){
+					out.println("Failed to remove property, are you sure it exists?.");
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 6:
 				out.println("Please enter the address of the property you want to remove a room from: ");
 				Property place = system.searchProperty(in.nextLine());
 				out.println("Please enter the floor of the room you want to remove: ");
 				int flr = Menu.getInt();
-				ItemList<Room> rm = place.listRooms(flr);
-				for (int i = 0; i < rm.length(); i++) {
-					out.println("" + i + rm.get(i));
+				try {
+					ItemList<Room> rm = place.listRooms(flr);
+					for (int i = 0; i < rm.length(); i++) {
+						out.println("" + i + rm.get(i));
+					}
+				}catch(Exception e){
+					out.println("Failed to get property, are you sure it exists?");
+					System.err.println(e.getMessage());
 				}
-				out.println("Please select a room from the list: ");
-				place.removeRoom(flr, Menu.getInt());
+				try {
+					out.println("Please select a room from the list: ");
+					place.removeRoom(flr, Menu.getInt());
+					out.println("Room removed");
+				}catch(Exception e){
+					out.println("Failed to remove room.");
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 7:
 				out.println("Please enter the ID of the bed you wish to remove: ");
-				system.removeBed(system.searchBed(Menu.getInt()));
+				try {
+					system.removeBed(system.searchBed(Menu.getInt()));
+					out.println("Bed removed");
+				}catch(Exception e){
+					out.println("Failed to remove bed. Likely an invalid ID.");
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 8:
 				out.println("Please enter the ID of the student you wish to remove: ");
-				system.removeStudent(system.searchStudent(Menu.getInt()));
+				try {
+					system.removeStudent(system.searchStudent(Menu.getInt()));
+					out.println("Student removed");
+				}catch(Exception e){
+					out.println("Failed to remove student. Likely an invalid ID.");
+					System.err.println(e.getMessage());
+				}
 				break;
 			default:
 				out.println("Invalid index, please try again.");
@@ -248,17 +299,27 @@ class Menu {
 				int sid = Menu.getInt();
 				out.println("please enter bed ID: ");
 				int bid = Menu.getInt();
-				Student stud = system.searchStudent(sid);
-				out.println(stud);
-				Bed bed = system.searchBed(bid);
-				out.println(bed);
-				system.assignStudentBed(stud, bed);
-				out.println("Assigned.");
+				try {
+					Student stud = system.searchStudent(sid);
+					out.println(stud);
+					Bed bed = system.searchBed(bid);
+					out.println(bed);
+					system.assignStudentBed(stud, bed);
+					out.println("Assigned.");
+				}catch(Exception e){
+					out.println("Invalid student or bed specified.");
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 2:
 				out.println("Enter student ID: ");
 				int uid = Menu.getInt();
+				try {
 				system.removeStudentBed(system.searchStudent(uid));
+				}catch(Exception e){
+					out.println("Invalid student ID specified.");
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 0:
 				inMenu = false;
