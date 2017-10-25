@@ -441,6 +441,7 @@ class Menu {
 			in.nextLine();
 			return i;
 		}catch(Exception e) {
+			in.nextLine();
 			System.err.println(e);
 			return -1;
 		}
@@ -458,6 +459,7 @@ class Menu {
 			return f;
 		}catch(Exception e) {
 			System.err.println(e);
+			in.nextLine();
 			return -1;
 		}
 	}
@@ -473,6 +475,7 @@ class Menu {
 			return false;
 		return true;
 		}catch(Exception e) {
+			in.nextLine();
 			return true;
 		}
 	}
