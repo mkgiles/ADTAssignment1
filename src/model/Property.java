@@ -10,10 +10,10 @@ public class Property implements CSV {
 	/** The address. */
 	private String address;
 
-	/** The distance. */
+	/** The distance from the college. */
 	private int distance;
 
-	/** The spaces. */
+	/** The number of parking spaces. */
 	private int spaces;
 
 	/** The rooms. */
@@ -74,26 +74,26 @@ public class Property implements CSV {
 	}
 
 	/**
-	 * Gets the spaces.
+	 * Gets the number of spaces.
 	 *
-	 * @return the spaces
+	 * @return the number of spaces
 	 */
 	public int getSpaces() {
 		return spaces;
 	}
 
 	/**
-	 * Sets the spaces.
+	 * Sets the number of spaces.
 	 *
 	 * @param spaces
-	 *            the spaces to set
+	 *            the number of spaces to set
 	 */
 	public void setSpaces(int spaces) {
 		this.spaces = spaces;
 	}
 
 	/**
-	 * Adds the room.
+	 * Adds a room.
 	 *
 	 * @param room
 	 *            the room

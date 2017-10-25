@@ -9,10 +9,10 @@ package model;
  */
 public class ItemList<T extends CSV> {
 
-	/** The next. */
+	/** The next item in the list. (cdr)*/
 	private ItemList<T> next = null;
 
-	/** The object. */
+	/** The object containing in the head of the list. (car) */
 	private T object;
 
 	/**
@@ -47,7 +47,7 @@ public class ItemList<T extends CSV> {
 	}
 
 	/**
-	 * Next.
+	 * Move to the next node in the list.
 	 *
 	 * @return the item list
 	 */
@@ -56,7 +56,7 @@ public class ItemList<T extends CSV> {
 	}
 
 	/**
-	 * Retrieve.
+	 * Retrieve the item at the head of the list..
 	 *
 	 * @return the t
 	 */
@@ -65,7 +65,7 @@ public class ItemList<T extends CSV> {
 	}
 
 	/**
-	 * Length.
+	 * Returns the length of the list.
 	 *
 	 * @return the int
 	 */
@@ -120,7 +120,7 @@ public class ItemList<T extends CSV> {
 	}
 
 	/**
-	 * Gets the.
+	 * Gets the object at a given index.
 	 *
 	 * @param index
 	 *            the index
@@ -136,7 +136,7 @@ public class ItemList<T extends CSV> {
 	}
 
 	/**
-	 * Gets the index of.
+	 * Gets the index of an object, returns minus one if not found.
 	 *
 	 * @param object
 	 *            the object
@@ -147,7 +147,7 @@ public class ItemList<T extends CSV> {
 	}
 
 	/**
-	 * Gets the index of.
+	 * Internal iter-recursive method for getIndexOf.
 	 *
 	 * @param object
 	 *            the object
@@ -165,7 +165,7 @@ public class ItemList<T extends CSV> {
 	}
 
 	/**
-	 * Sets the.
+	 * Sets the element at a given index to the given object.
 	 *
 	 * @param index
 	 *            the index
@@ -180,7 +180,7 @@ public class ItemList<T extends CSV> {
 	}
 
 	/**
-	 * Removes the.
+	 * Removes the node at a given index.
 	 *
 	 * @param index
 	 *            the index
@@ -201,7 +201,7 @@ public class ItemList<T extends CSV> {
 	}
 
 	/**
-	 * To CSV.
+	 * To CSV method for creating a CSV out of a list of CSV interface extending entities.
 	 *
 	 * @param divider
 	 *            the divider

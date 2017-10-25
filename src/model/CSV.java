@@ -4,14 +4,14 @@
 package model;
 
 /**
- * The Interface CSV.
+ * The Interface for model entities which need to be converted to CSV.
  *
  * @author Conor James Giles
  */
 public interface CSV {
 
 	/**
-	 * To CSV.
+	 * Convert model to CSV.
 	 *
 	 * @return the string
 	 */

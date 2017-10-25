@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package model;
 
 /**
@@ -15,11 +18,11 @@ public class Bed implements CSV {
 	 */
 	private static enum Type {
 
-		/** The single. */
+		/** Single bed */
 		SINGLE,
-		/** The double. */
+		/** Double bed. */
 		DOUBLE,
-		/** The bunk. */
+		/** Bunk bed. */
 		BUNK
 	}
 
@@ -32,10 +35,10 @@ public class Bed implements CSV {
 	/** The uid. */
 	private int uid;
 
-	/** The student. */
+	/** The student occupant. */
 	private Student student = null;
 
-	/** The bunkmate. */
+	/** The bunkmate. (For bunkbeds) */
 	private Student bunkmate = null;
 
 	/**

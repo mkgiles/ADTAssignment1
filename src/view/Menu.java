@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package view;
 
 import java.io.PrintStream;
@@ -17,13 +20,13 @@ import model.Student;
  */
 class Menu {
 
-	/** The in. */
+	/** The input stream. */
 	private static Scanner in = new Scanner(System.in);
 
-	/** The out. */
+	/** The output stream. */
 	private static PrintStream out = System.out;
 
-	/** The system. */
+	/** The system API. */
 	private static SystemAPI system = new SystemAPI();
 
 	/**
@@ -31,24 +34,19 @@ class Menu {
 	 *
 	 * @param args
 	 *            the arguments
-	 * @throws Exception
-	 *             the exception
 	 */
 	public static void main(String[] args){
 		Menu.menu();
 	}
 
 	/**
-	 * Menu.
-	 *
-	 * @throws Exception
-	 *             the exception
+	 * Main Menu.
 	 */
 	public static void menu(){
 		out.print("Welcome to the WIT Student Accomodation Management Tool.\nPress Enter to begin.");
 		in.nextLine();
 		while (true) {
-			out.print("Please select an option:\n1)Add new entities\n2)Save/Load properties\n3)Assign beds to students\n4)View property data\n0)Quit\n>");
+			out.print("Please select an option:\n1)Add/Remove entities\n2)Save/Load properties\n3)Assign beds to students\n4)View data\n0)Quit\n>");
 			switch (Menu.getInt()) {
 			case 0:
 				Menu.quit();
@@ -80,7 +78,7 @@ class Menu {
 	}
 
 	/**
-	 * Adds the menu.
+	 * Menu for adding and removing items.
 	 */
 	public static void addMenu() {
 		Boolean inMenu = true;
@@ -189,9 +187,6 @@ class Menu {
 
 	/**
 	 * Save load menu.
-	 *
-	 * @throws Exception
-	 *             the exception
 	 */
 	public static void saveLoadMenu() {
 		Boolean inMenu = true;
@@ -375,7 +370,7 @@ class Menu {
 	}
 
 	/**
-	 * Gets the int.
+	 * Gets an int from input.
 	 *
 	 * @return the int
 	 */
@@ -391,7 +386,7 @@ class Menu {
 	}
 
 	/**
-	 * Gets the float.
+	 * Gets a float from input.
 	 *
 	 * @return the float
 	 */
@@ -407,7 +402,7 @@ class Menu {
 	}
 
 	/**
-	 * Gets the bool.
+	 * Gets a bool from input.
 	 *
 	 * @return the bool
 	 */

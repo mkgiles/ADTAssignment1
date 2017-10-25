@@ -10,7 +10,7 @@ public class Room implements CSV {
 	/** The floor. */
 	private int floor;
 
-	/** The ensuite. */
+	/** The ensuite check. */
 	private Boolean ensuite;
 
 	/** The beds. */
@@ -58,10 +58,10 @@ public class Room implements CSV {
 	}
 
 	/**
-	 * Sets the ensuite.
+	 * Sets the ensuite check.
 	 *
 	 * @param ensuite
-	 *            the ensuite to set
+	 *            the value to set
 	 */
 	public void setEnsuite(Boolean ensuite) {
 		this.ensuite = ensuite;
@@ -77,7 +77,7 @@ public class Room implements CSV {
 	}
 
 	/**
-	 * Adds the bed.
+	 * Adds a bed.
 	 *
 	 * @param bed
 	 *            the bed
