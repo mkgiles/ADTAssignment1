@@ -112,7 +112,7 @@ public class SystemAPI {
 		str = file.readLine();
 		while (str != null) {
 			String[] params = str.split(", ");
-			Property prop = new Property(params[0], Integer.parseInt(params[1]), Integer.parseInt(params[2]));
+			Property prop = new Property(params[0].replaceAll("%", ","), Integer.parseInt(params[1]), Integer.parseInt(params[2]));
 			for (int i = 3; i < params.length;) {
 				Boolean ensuite = params[i++] == "RoomES";
 				Room room = new Room(Integer.parseInt(params[i++]), ensuite);

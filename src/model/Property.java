@@ -112,7 +112,7 @@ public class Property implements CSV {
 	 */
 	@Override
 	public String toCSV() {
-		String str = address + ", " + distance + ", " + spaces;
+		String str = address.replaceAll(",", "%") + ", " + distance + ", " + spaces;
 		if (rooms != null) {
 			str += ", ";
 			str += rooms.toCSV(", ");
